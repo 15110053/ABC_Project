@@ -1,0 +1,21 @@
+<div md-colors="{background: 'Grey-300'}">
+	<div layout= "row">
+		<div class= "md-padding" flex>
+			<md-list class= "md-whiteframe-5dp" md-colors="{background: 'Grey-50'}">
+				<md-list-item ng-click="ctrl.openProfileManagement()">Profile management</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-click="ctrl.openOrderList()">Order management</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-click="ctrl.openShoppingCart()">My shopping cart</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-click="ctrl.doST()">NaN</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-click="ctrl.doST()">NaN</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-click="ctrl.doST()">NaN</md-list-item>
+			</md-list>
+		</div>
+		<div flex= "80" ui-view></div>
+	</div>
+	
+</div>

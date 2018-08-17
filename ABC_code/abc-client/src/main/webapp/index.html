@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ecommerce site</title>
+		<link href = "css/angular-material.min.css" rel = "stylesheet">
+		<link href = "css/style.css" rel = "stylesheet">
+		<script src = "scripts/lib/angular.min.js"></script>
+		<script src = "scripts/lib/angular-animate.min.js"></script>
+		<script src = "scripts/lib/angular-aria.min.js"></script>
+		<script src = "scripts/lib/angular-material.min.js"></script>
+		<script src = "scripts/lib/angular-messages.min.js"></script>
+		<script src = "scripts/lib/angular-ui-router.min.js"></script>
+		<script src = "scripts/lib/angular-cookies.min.js"></script>
+		<script src = "scripts/App.js"></script>
+		<script src = "scripts/service/ShareDataService.js"></script>
+		<script src = "scripts/service/MainPageService.js"></script>
+		<script src = "scripts/service/ProductPageService.js"></script>
+		<script src = "scripts/service/ProductFilterPageService.js"></script>
+		<script src = "scripts/service/RegisterService.js"></script>
+		<script src = "scripts/service/LoginService.js"></script>
+		<script src = "scripts/service/ManagementProductService.js"></script>
+		<script src = "scripts/service/EditProductService.js"></script>
+		<script src = "scripts/service/CartService.js"></script>
+		<script src = "scripts/service/OrderPageService.js"></script>
+		<script src = "scripts/service/ProfileManagementService.js"></script>
+		<script src = "scripts/controller/MainPageController.js"></script>
+		<script src = "scripts/controller/ProductPageController.js"></script>
+		<script src = "scripts/controller/HeaderController.js"></script>
+		<script src = "scripts/controller/ProductFilterController.js"></script>
+		<script src = "scripts/controller/ProductFilterSearchController.js"></script>
+		<script src = "scripts/controller/LoginController.js"></script>
+		<script src = "scripts/controller/RegisterController.js"></script>
+		<script src = "scripts/controller/NavController.js"></script>
+		<script src = "scripts/controller/CartController.js"></script>
+		<script src = "scripts/controller/ManagementProductController.js"></script>
+		<script src = "scripts/controller/EditProductController.js"></script>
+		<script src = "scripts/controller/OrderPageController.js"></script>
+		<script src = "scripts/controller/UserManagementController.js"></script>
+		<script src = "scripts/controller/OrderListController.js"></script>
+		<script src = "scripts/controller/OrderDetailDialogController.js"></script>
+		<script src = "scripts/controller/ProfileManagementController.js"></script>
+		<script src = "scripts/controller/ProducerManagementController.js"></script>
+		
+	</head>
+	<body ng-app = "EcommerceModule" ng-cloak>
+		<div layout = "column" layout-fill >
+			<header md-colors = "{background: 'Indigo'}" ng-controller = "HeaderController as ctrl">
+				<div >
+					<div layout = "row" layout-sm = "column" class = "heading" layout-wrap>
+						<div layout = "row" flex>
+							<a href = "http://localhost:8181/abcClientApp/#!">
+								<img src = "resources/images/Logo.png" alt = "lazada" >
+							</a>
+							<md-input-container md-no-float class = "md-block" flex = "70">
+								<input ng-keypress = "ctrl.doSearch($event)" placeholder = "search keyword" type = "text" ng-model = "keyWord">
+							</md-input-container>
+						</div>
+						<div class = "HeaderIcon" layout = "row" layout-align = "space-around center" flex = "15">
+							<md-button ng-click= "ctrl.openCart()" class= "md-icon-button" aria-label= "user">
+								<md-icon  class= "userIcon" ng-style = "{color: 'white'}" md-svg-icon="resources/images/Cart.svg"></md-icon>
+							</md-button>
+							
+							<md-menu-bar ng-if= "loginStatus">
+								<md-menu>
+									<md-button ng-click= "$mdMenu.open($event)" class= "md-icon-button" aria-label= "user">
+										<md-icon  class= "userIcon" ng-style = "{color: 'white'}" md-svg-icon="resources/images/User.svg"></md-icon>
+									</md-button>
+									<md-menu-content width= "3">
+										<md-menu-item>{{info.userName}}</md-menu-item>
+										<md-menu-item ng-if= "ctrl.checkProducerRole()"><md-button ng-click= "ctrl.openManagerProductPage()">Manage product</md-button></md-menu-item>
+										<md-menu-item><md-button ng-click= "ctrl.logout()">Logout</md-button></md-menu-item>
+									</md-menu-content>
+								</md-menu>
+							</md-menu-bar>
+							<md-button ng-if= "!loginStatus" ng-href= "#!/login" class= "md-icon-button" aria-label= "user">
+								<md-icon  class= "userIcon" ng-style = "{color: 'white'}" md-svg-icon="resources/images/Login.svg"></md-icon>
+							</md-button>
+						</div>
+					</div>
+					<div>
+						<md-menu-bar>
+							<md-menu>
+								<md-button flex ng-click = "$mdMenu.open()">Catagories</md-button>
+								<md-menu-content width = "4"  >
+									<md-menu-item ng-repeat = "x in CategoryData">
+										<md-button ng-href = "#!/product/{{x.categoryName}}/{{x.idCategory}}" ng-if = "x.subcategory.length === 0">{{x.categoryName}}</md-button>
+										<md-menu ng-if = "x.subcategory.length > 0 ">
+											<md-button ng-href = "#!/product/{{x.categoryName}}/{{x.idCategory}}" ng-click = "$mdMenu.open()">{{x.categoryName}}</md-button>
+											<md-menu-content width = "4">
+												<md-menu-item ng-repeat = "x1 in x.subcategory"><md-button ng-href = "#!/product/{{x.categoryName}}/{{x1.subCategoryName}}/{{x1.idSubCategory}}">{{x1.subCategoryName}}</md-button></md-menu-item>
+											</md-menu-content>
+										</md-menu>
+									</md-menu-item>
+								</md-menu-content>
+							</md-menu>
+						</md-menu-bar>
+					</div>
+				</div>
+			</header>
+			<!--nav ng-controller = "NavController as ctrl">
+				<ul class = "navigation" >
+					<li ng-repeat = "x in ctrl.navItem"><a ng-href = "{{x.url}}">{{x.display}}</a></li>
+				</ul>
+			</nav-->
+			<main ui-view></main>
+			<footer md-colors = "{background: 'Indigo'}">
+				<div layout = "row" class = "md-padding">
+					<div flex = "25">
+						<h4>CONTACT US</h4>
+						<p>Mon - Sun: 9am - 6pm(Hotline), 7am-10pm <br>(Online chat)</p>
+						<p>Help Center</p>
+						<p>Payment</p>
+						<p>How to Buy</p>
+						<p>Shipping & Delivery</p>
+						<p>International Product Policy</p>
+						<p>How to Return</p>
+						<p>Voucher usage</p>
+					</div>
+					<div flex>
+						<h4>ABC VIETNAM</h4>
+						<p>About ABC</p>
+						<p>Sell on ABC</p>
+						<p>Affiliate Program</p>
+						<p>Careers</p>
+						<p>Terms & Conditions</p>
+						<p>Privacy Policy</p>
+						<p>Campaign Terms & Conditions</p>
+						<p>Press & Media</p>
+						<p>Operation Regulation</p>
+						<p>Redmart</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<div class = "md-padding cartTableProduct">
+	<table md-colors="{background: 'Grey-50'}">
+		<tr>
+			<th>idOrder</th>
+			<th>orderDate</th>
+			<th>price</th>
+			<th>statusDTO</th>
+			<th>Action</th>
+		</tr>
+			<tr ng-repeat= "x in orderData">
+				<td ng-click= "ctrl.view(x.idOrder, x.price, $event)">{{x.idOrder}}</td>
+				<td ng-click= "ctrl.view(x.idOrder, x.price, $event)">{{x.orderDate}}</td>
+				<td ng-click= "ctrl.view(x.idOrder, x.price, $event)">{{x.price.toLocaleString("vi-VN",{ style: 'currency', currency: 'VND' })}}</td>
+				<td ng-click= "ctrl.view(x.idOrder, x.price, $event)">{{x.statusDTO}}</td>
+				<td>
+					<md-button ng-click= "ctrl.view(x.idOrder, x.price, $event)" class= "md-icon-button" aria-label= "cancel">
+						<md-icon md-svg-icon="resources/images/view.svg"></md-icon>
+					</md-button>
+					<md-button ng-if= "!ctrl.isCancel(x.idOrder)" ng-click= "ctrl.cancel(x.idOrder)" class= "md-icon-button" aria-label= "cancel">
+						<md-icon md-svg-icon="resources/images/cancel.svg"></md-icon>
+					</md-button>
+				</td>
+			</tr>
+	</table>
+</div>

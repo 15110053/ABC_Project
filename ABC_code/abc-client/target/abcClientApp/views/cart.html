@@ -1,0 +1,36 @@
+<div layout= "column" layout-align= "start end" class = "md-padding cartTableProduct">
+	<md-button ng-if= "totalPrice > 0" class= "md-warn md-raised" ng-click= "ctrl.cleanCart()">Clean cart</md-button>
+	<div ng-if= "totalPrice == 0">There are no products in cart</div>
+	<table ng-if= "totalPrice > 0" md-colors="{background: 'Grey-50'}">
+		<tr>
+			<th>Image</th>
+			<th>Product Name</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Delete</th>
+		</tr>
+		<tr ng-repeat= "x in productData">
+			<td><img ng-src= "{{x.product.image}}"></td>
+			<td>{{x.product.productName}}</td>
+			<td>{{x.product.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</td>
+			<td>
+				<md-button ng-click= "ctrl.minus(x.product.idProduct)" class= "md-icon-button" aria-label= "plus">
+					<md-icon md-svg-icon="resources/images/minus.svg"></md-icon>
+				</md-button>
+				{{x.quantity}}
+				<md-button ng-click= "ctrl.plus(x.product.idProduct)" class= "md-icon-button" aria-label= "minus">
+					<md-icon md-svg-icon="resources/images/plus.svg"></md-icon>
+				</md-button>
+			</td>
+			<td>
+				<md-button ng-click= "ctrl.remove(x.product.idProduct)" class= "md-icon-button" aria-label= "minus">
+					<md-icon md-svg-icon="resources/images/bin.svg"></md-icon>
+				</md-button>
+			</td>
+		</tr>
+	</table>
+	<div ng-if= "totalPrice > 0">
+		<p>Total: {{totalPrice.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</p>
+		<md-button class= "floatRight md-raised md-primary" href= "#!/order">Order</md-button>
+	</div>
+</div>

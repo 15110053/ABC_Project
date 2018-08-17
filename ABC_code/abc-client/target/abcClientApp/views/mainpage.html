@@ -1,0 +1,54 @@
+<div ng-controller = "MainPageController as ctrl">
+	<div class = "productTitle">
+		<div layout = "row" layout-align = "space-between center">
+			<h2>The most viewed product</h2>
+			<a ng-href = "#!/product/mostviewproduct">show more</a>
+		</div>
+		<md-content layout = "row" layout-wrap>
+			<div ng-repeat = "x in MostViewProductData" flex-sm = "50" flex-md = "25" flex-gt-md = "20">
+				<md-card class = "item md-whiteframe-2dp"  ng-mouseenter = "ctrl.hover($event)" 
+						ng-mouseleave = "ctrl.leave($event)">
+					<a ng-href = "#!/productDetail/{{x.idProduct}}/{{x.productName}}">
+						<img ng-src = "{{x.image}}" alt = "{{x.productName}}" class = "md-card-image">
+					</a>
+					<md-card-title layout = "column">
+						<md-card-title-text><p>{{x.productName}}</p></md-card-title-text>
+						<md-card-title-text><h3>{{x.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</h3></md-card-title-text>
+					</md-card-title>
+					<md-card-action layout = "row" layout-align = "space-between center">
+						<p class = "smallP">viewed: {{x.viewCounter}}</p>
+						<md-button ng-click= "ctrl.addMostViewProductToCart(x.idProduct)">Add to cart</md-button>
+					</md-card-action>
+				</md-card>
+			</div>
+		</md-content>
+	</div>
+	<md-divider></md-divider>
+	<div class = "productTitle">
+		<div layout = "row" layout-align = "space-between center">
+			<h2>New product</h2>
+			<a ng-href = "#!/product/newproduct">show more</a>
+		</div>
+		<md-content layout = "row" layout-wrap>
+			<div ng-repeat = "x in NewProductData" flex-sm = "50" flex-md = "25" flex-gt-md = "20">
+				<md-card class = "item md-whiteframe-2dp"  ng-mouseenter = "ctrl.hover($event)" 
+						ng-mouseleave = "ctrl.leave($event)">
+					<a ng-href = "#!/productDetail/{{x.idProduct}}/{{x.productName}}">
+						<img ng-src = "{{x.image}}" alt = "{{x.productName}}" class = "md-card-image">
+					</a>
+					<md-card-title layout = "column">
+						<md-card-title-text><p>{{x.productName}}</p></md-card-title-text>
+						<md-card-title-text><h3>{{x.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</h3></md-card-title-text>
+					</md-card-title>
+					<md-card-action layout = "row" layout-align = "space-between center">
+						<p class = "smallP">viewed: {{x.viewCounter}}</p>
+						<md-button ng-click= "ctrl.addNewProductToCart(x.idProduct)">Add to cart</md-button>
+					</md-card-action>
+				</md-card>
+			</div>
+		</md-content>
+	</div>
+	<div layout = "row" class = "pagination">
+		<md-button ng-repeat = "x in ctrl.range()" ng-click = "ctrl.openPageIndex(x)" class = "paginationButton">{{x}}</md-button>
+	</div>
+</div>

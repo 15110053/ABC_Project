@@ -1,0 +1,24 @@
+<div >
+	<div class = "md-padding tableProduct">
+		<table>
+			<tr>
+				<th>ProductID</th>
+				<th>ProductName</th>
+				<th>Description</th>
+				<th>Price</th>
+				<th>Status</th>
+				<th>View Counter</th>
+				<td><md-button class= "md-raised md-warn" ng-click= "ctrl.showAddDialog()">add product</md-button></td>
+			</tr>
+			<tr ng-repeat= "x in productData">
+				<td>{{x.idProduct}}</td>
+				<td>{{x.productName}}</td>
+				<td>{{x.description}}</td>
+				<td>{{x.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</td>
+				<td>{{x.status}}</td>
+				<td>{{x.viewCounter}}</td>
+				<td><md-button class= "md-raised" ng-click= "ctrl.showEditDialog(x.idProduct)">Edit product</md-button></td>
+			</tr>
+		</table>
+	</div>
+</div>

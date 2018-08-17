@@ -1,0 +1,99 @@
+<div>
+	<div layout = "column" class = "md-padding">
+		<div class = "ordercenter md-whiteframe-8dp" layout = "column" layout-wrap>
+			<h2>Order product</h2>
+			<md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+				<md-tab label= "Step 1" ng-disabled= "!step1Status">
+					<div class= "ordertable">
+						<table>
+							<tr>
+								<th>Image</th>
+								<th>Product Name</th>
+								<th>Price</th>
+								<th>Quantity</th>
+							</tr>
+							<tr ng-repeat= "x in productData">
+								<td><img ng-src= "{{x.product.image}}"></td>
+								<td>{{x.product.productName}}</td>
+								<td>{{x.product.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</td>
+								<td>{{x.quantity}}</td>
+							</tr>
+						</table>
+					</div>
+					<h3>Total: {{totalPrice.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</h3>
+					<div layout = "row" layout-align = "end center">
+						<md-button ng-click = "ctrl.openTab('2')" class = "md-raised md-primary">Confirm</md-button>
+					</div>
+				</md-tab>
+				<md-tab label= "step 2" ng-disabled= "!step2Status">
+					<form novalidate name = "orderFormTwo">
+						<md-input-container class = "md-block" >
+							<label>Full name</label>
+							<input required ng-model = "fullName" name = "fullName"></input>
+							<div ng-messages = "orderFormTwo.fullName.$error">
+								<div ng-message = "required">Please enter your full name</div>
+							</div>
+						</md-input-container>
+						
+						<md-input-container class = "md-block" >
+							<label>Phone number</label>
+							<input md-maxlength = "11" required type = "number" ng-model = "phoneNumber" name = "phoneNumber"></input>
+							<div ng-messages = "orderFormTwo.phoneNumber.$error">
+								<div ng-message = "required">Please enter your phone number</div>
+								<div ng-message = "md-maxlength">Phone number must be less than 11 digits</div>
+								<div ng-message = "number">Please input number</div>
+							</div>
+						</md-input-container>
+						<md-input-container class = "md-block" >
+							<label>Address</label>
+							<input required type = "text" ng-model = "address" name = "address"></input>
+							<div ng-messages = "orderFormTwo.address.$error">
+								<div ng-message = "required">Please enter your address</div>
+							</div>
+						</md-input-container>
+						<md-input-container class = "md-block" >
+							<label>Payment method</label>
+							<md-select required ng-model= "payment" name= "payment">
+								<md-option ng-value= "1">Cash on delivery</md-option>
+							</md-select>
+							<div ng-messages = "orderFormTwo.payment.$error">
+								<div ng-message = "required">Please select a payment method</div>
+							</div>
+						</md-input-container>
+						<div layout = "row" layout-align = "end center">
+							<md-button ng-click = "ctrl.openTab('1')" class = "md-raised md-primary">Back</md-button>
+							<md-button type = "submit" ng-click = "ctrl.openTab('3')" class = "md-raised md-primary">Next</md-button>
+						</div>
+					</form>
+				</md-tab>
+				<md-tab label= "Step 3" ng-disabled= "!step3Status">
+					<div class= "ordertable">
+						<table>
+							<tr>
+								<th>Image</th>
+								<th>Product Name</th>
+								<th>Price</th>
+								<th>Quantity</th>
+							</tr>
+							<tr ng-repeat= "x in productData">
+								<td><img ng-src= "{{x.product.image}}"></td>
+								<td>{{x.product.productName}}</td>
+								<td>{{x.product.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</td>
+								<td>{{x.quantity}}</td>
+							</tr>
+						</table>
+					</div>
+					<h3>Total: {{totalPrice.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</h3>
+					<p>Full name: {{fullName}}</p>
+					<p>Phone Number: {{phoneNumber}}</p>
+					<p>Address: {{address}}</p>
+					<p>Payment method: {{ctrl.translatePaymentMethod()}}</p>
+					<div layout = "row" layout-align = "end center">
+						<md-button ng-click = "ctrl.openTab('2')" class = "md-raised md-primary">Back</md-button>
+						<md-button ng-click = "ctrl.createOrder()" class = "md-raised md-primary">Create Order</md-button>
+					</div>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</div>
+</div>

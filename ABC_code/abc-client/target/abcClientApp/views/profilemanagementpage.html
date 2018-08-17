@@ -1,0 +1,44 @@
+<div >
+	<div layout= "column" layout-align="center center" class = "md-padding">
+		<form class = "md-padding md-whiteframe-5dp htmlDialog" name= "editForm" md-colors="{background: 'Grey-50'}">
+			<md-input-container class= "md-block">
+				<label>User ID</label>
+				<input ng-model= "userInfo.userId" disabled></input>
+			</md-input-container>
+			<md-input-container class= "md-block">
+				<label>User name</label>
+				<input required ng-model= "userInfo.userName" name= "userName"></input>
+				<div class="errors" ng-messages="editForm.userName.$error">
+					<div ng-message="required">please input your full name</div>
+				</div>
+			</md-input-container>
+			<md-input-container class= "md-block">
+				<label>Phone number</label>
+				<input type= "number" ng-model= "userInfo.phoneNumber" name= "phoneNumber" required></input>
+				<div class="errors" ng-messages="editForm.phoneNumber.$error">
+					<div ng-message="number">the input is not numbers</div>
+					<div ng-message="required">please input your phone number</div>
+				</div>
+			</md-input-container>
+			<md-input-container class= "md-block">
+				<label>Email</label>
+				<input required type= "email" ng-model= "userInfo.email" name= "email"></input>
+				<div class="errors" ng-messages="editForm.email.$error">
+					<div ng-message="required">please input your email</div>
+					<div ng-message="email">the input is not a email</div>
+				</div>
+			</md-input-container>
+			<md-input-container class= "md-block" >
+				<label>Identity number</label>
+				<input required type= "number" ng-model= "userInfo.identityNumber" name= "identityNumber"></input>
+				<div class="errors" ng-messages="editForm.identityNumber.$error">
+					<div ng-message="required">please input your identity number</div>
+					<div ng-message="number">please input a number</div>
+				</div>
+			</md-input-container>
+			<div layout= "row" layout-align= "end center">
+				<md-button ng-click= "ctrl.updateUserInfo()" type="submit" class= "md-raised md-primary">Modify</md-button>
+			</div>
+		</form>
+	</div>
+</div>

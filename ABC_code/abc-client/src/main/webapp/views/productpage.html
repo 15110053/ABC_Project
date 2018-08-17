@@ -1,0 +1,151 @@
+<div ng-controller = "ProductPageController as ctrl">
+	<ul class = "navigation" >
+		<li><a href = "/abcClientApp">Home</a></li>
+		<li><img src = "resources/images/next.svg"></li>
+		<li><a href = "#!/product/{{productData.subCategoryDTO.categoryDTO.categoryName}}/{{productData.subCategoryDTO.categoryDTO.idCategory}}">{{productData.subCategoryDTO.categoryDTO.categoryName}}</a></li>
+		<li><img src = "resources/images/next.svg"></li>
+		<li><a ng-href = "/abcClientApp/#!/product/{{productData.subCategoryDTO.categoryDTO.categoryName}}/{{productData.subCategoryDTO.subCategoryName}}/{{productData.subCategoryDTO.idSubCategory}}"
+			>{{productData.subCategoryDTO.subCategoryName}}</a></li>
+		<li><img src = "resources/images/next.svg"></li>
+		<li><a>{{productData.productName}}</a></li>
+	</ul>
+	<md-content layout = "column" class = "md-padding" layout-wrap>
+		<div layout = "row" layout-wrap class = "ProductDetail ContentColor" layout-align = "start start">
+			<img ng-src = "{{productData.image}}" alt = "image" >
+			<div layout = column>
+				<p class = "Name">{{productData.productName}}</p>
+				<p class = "Price">{{productData.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</p>
+				<div layout = "row">
+					<p> Colors:</p>
+					<md-button class = "ColorButton md-raise md-fab md-mini" ng-repeat = "x in ctrl.colors" md-colors = "{background: '{{x}}'}">{{x}}</md-button>
+				</div>
+				<md-button ng-click= "ctrl.addProductToCart(productData.idProduct)" class = "md-raised md-primary" flex = "10">Add to cart</md-button>
+			</div>
+		</div>
+		<md-divider></md-divider>
+		<div>
+			<md-nav-bar md-no-ink-bar="false"
+					md-selected-nav-item="ctrl.StarupPage"
+					nav-bar-aria-label="navigation links">
+				<md-nav-item md-nav-click = "ctrl.OpenTab('description')" name = "description">
+					Description
+				</md-nav-item>
+				<md-nav-item md-nav-click = "ctrl.OpenTab('ratingcomment')" name = "rating">
+					Rating & comment
+				</md-nav-item>
+			</md-nav-bar>
+			<div ng-show = "ctrl.DescriptionStatus">
+				<md-content class = "md-padding ContentColor">
+					<p>{{productData.description}}</p>
+				</md-content>
+			</div>
+			<div ng-show = "ctrl.RatingCommentStatus">
+				<md-content class = "ContentColor">
+					<md-toolbar class = "md-toolbar-tools">Rating</md-toolbar>
+					<div class = "md-padding">
+						<h3>Rating: {{rate}}/10</h3>
+						<md-slider flex = "33" step = "1" min = "1" max = "10" ng-model = "rate"></md-slider>
+					</div>
+				</md-content>
+				<md-content class = "ContentColor">
+					<md-toolbar class = "md-toolbar-tools">Comment</md-toolbar>
+					<md-list>
+						<div layout = "row" layout-align = "center center">
+							<md-input-container class = "CommentArea" flex = "70">
+								<label>comment here</label>
+								<textarea rows = "1" cols = "100"></textarea>
+							</md-input-container>
+							<md-button>comment</md-button>
+						</div>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						<md-list-item class = "md-3-line">
+							<div class = "md-list-item-text" layout = "column">
+								<h3>Say Hoi</h3>
+								<h4>good product</h4>
+								<p>awesome product, it hasn't problem</p>
+							</div>
+							<h4>11/07/2018</h4>
+						</md-list-item>
+						<md-divider></md-divider>
+						
+					</md-list>
+				</md-content>
+			</div>
+			<div ng-show = "ctrl.CommentStatus">
+				
+			</div>
+		</div>
+		
+	</md-content>
+</div>

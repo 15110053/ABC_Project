@@ -1,0 +1,185 @@
+.heading div a img{
+	width: 150px;
+	height: 80px;
+	margin-top: 5px;
+	margin-left: 30px;
+}
+.heading div md-input-container input {
+	background-color: white;
+	height: 40px;
+	font-size: 20px
+}
+.heading div md-input-container {
+	margin-left: 50px;
+}
+.heading div md-button {
+	color: red;
+}
+.item img {
+	padding-top: 5px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	height: 200px;
+}
+.item md-card-action p.smallP{
+	font-size: 15px;
+	margin-left: 10px;
+}
+a {
+	text-decoration: none;
+}
+.ProductDetail img  {
+	width: 400px;
+	height: 400px;
+	margin-right: 50px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.ProductDetail div p.Name, p.Price{
+	font-size: 30px;
+}
+.ContentColor{
+	background-color: #f0f0f0;
+}
+footer div div p {
+	font-size: 12px;
+}
+.HeaderIcon a md-icon {
+	height: 30px;
+	width: 30px;
+}
+.HeaderIcon a {
+	padding-left: 0;
+	padding-right: 0;
+}
+md-input-container .md-error-spacer{
+	display:none;
+}
+.ColorButton {
+	font-size: 9px;
+}
+.paginationButton {
+	font-size: 16px;
+    margin: 20px 0;
+    padding: 3px 15px 3px 15px;
+    color: rgb(49, 46, 46);
+    background-color: rgba(224, 224, 224, 0.96);
+    text-transform: none;
+    font-weight: 400;
+    min-width:20px;
+}
+.pagination {
+	margin-left: 20px;
+}
+.productTitle md-content{
+	padding-bottom:20px;
+	padding-left:10px;
+	padding-right:10px;
+}
+.productTitle div h2, a{
+	padding-bottom:0px;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+.productTitle div a {
+	font-size: 15px;
+}
+.navigation {
+	list-style-type: none;
+    margin-top: 15px;
+	padding-left: 15px;
+}
+.navigation li {
+	display: inline;
+	margin: 5px;
+}
+.navigation li a {
+	padding-left: 0;
+	padding-right: 0;
+}
+.navigation li img {
+	height: 10px;
+	width: 10px;
+}
+.center {
+	margin: auto;
+    padding: 20px;
+	padding-bottom: 30px;
+    width: 40%;
+}
+
+.tableProduct table {
+    border-collapse: collapse;
+	float: right;
+    width: 100%;
+}
+
+.tableProduct th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+.tableProduct tr:nth-child(even){background-color: #f2f2f2}
+
+.tableProduct th {
+    background-color: #4CAF50;
+    color: white;
+}
+.editDialog img {
+	width: 400px;
+	height: 400px;
+}
+.cartTableProduct table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.cartTableProduct th, td {
+    text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.cartTableProduct th {
+    background-color: #4CAF50;
+    color: white;
+}
+.cartTableProduct img {
+	width: 150px;
+	height:150px;
+}
+.cartTableProduct div p {
+	font-size: 24px;
+	margin-bottom: 0px;
+}
+
+.ordertable table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ordertable table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.ordertable img {
+    width: 100px;
+	height: 100px;
+}
+.ordercenter {
+	margin: auto;
+    padding: 20px;
+	padding-bottom: 30px;
+    width: 60%;
+}
+.userIcon {
+	width: 30px;
+	height: 30px;
+}
+.floatRight {
+	float: right;
+}
+.htmlDialog {
+	width: 80%;
+}

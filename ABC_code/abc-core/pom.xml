@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.lshoi</groupId>
+		<artifactId>abc-root-pom</artifactId>
+		<version>1.0-1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.lshoi</groupId>
+	<artifactId>abc-core</artifactId>
+	<version>1.0-1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>ABC CORE</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.lshoi</groupId>
+			<artifactId>abc-api</artifactId>
+			<version>1.0-1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.0.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.0.7.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>8.5.31</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+							<!--<goal>test-jar</goal> -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven.dependency.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler.version}</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+
+
+
+		</plugins>
+	</build>
+	<properties>
+		<maven.dependency.version>2.9</maven.dependency.version>
+		<maven.jar.version>2.5</maven.jar.version>
+		<maven-compiler.version>3.2</maven-compiler.version>
+		<ex.jboss.serialization>1.0.3.GA</ex.jboss.serialization>
+		<ex.jboss.jmx>4.2.2.GA</ex.jboss.jmx>
+		<ex.jboss.serialization>1.0.3.GA</ex.jboss.serialization>
+		<ex.hibernate.version>4.2.14.Final</ex.hibernate.version>
+		<ex.spring.version>3.1.1.RELEASE</ex.spring.version>
+		<ex.spring.ws.version>2.1.1.RELEASE</ex.spring.ws.version>
+		<ex.commons.lang.version>2.3</ex.commons.lang.version>
+		<ex.junit.version>3.8.1</ex.junit.version>
+		<ex.junit4.version>4.11</ex.junit4.version>
+		<!-- Logging -->
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+
+	</properties>
+</project>

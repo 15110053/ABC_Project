@@ -1,0 +1,58 @@
+<div>
+	<div layout= "row" class= "editDialog md-padding" layout-align= "center start">
+		<div layout= "column" layout-align= "center center">
+			<img class= "md-whiteframe-1dp" ng-src= "{{editData.image}}"></img>
+			<md-button type= "file" class= "md-raised">change image</md-button>
+		</div>
+		<div layout= "column" flex= "60">
+			<form class = "md-padding" name= "editForm">
+				<md-input-container class= "md-block">
+					<label>Product ID</label>
+					<input ng-model= "editData.idProduct" disabled></input>
+				</md-input-container>
+				<div layout= "row">
+					<md-input-container flex= "30">
+						<label>Category</label>
+						<md-select ng-change= "ctrl.clearSubCategory()" ng-model= "category" name= "category" required>
+							<md-option ng-repeat="x in categoryData" ng-value= "x.idCategory">{{x.categoryName}}</md-option>
+						</md-select>
+						<div class="errors" ng-messages="editForm.category.$error">
+							<div ng-message="required">Required</div>
+						</div>
+					</md-input-container>
+					<md-input-container flex= "30">
+						<label>SubCategory</label>
+						<md-select ng-model= "editData.subCategoryDTO.idSubCategory" name= "subCategory" required>
+							<md-option ng-repeat="x in ctrl.getSubCategory()" ng-value= "x.idSubCategory">{{x.subCategoryName}}</md-option>
+						</md-select>
+						<div class="errors" ng-messages="editForm.subCategory.$error">
+							<div ng-message="required">Required</div>
+						</div>
+					</md-input-container>
+				</div>
+				<md-input-container class= "md-block">
+					<label>Product Name</label>
+					<input ng-model= "editData.productName"></input>
+				</md-input-container>
+				<md-input-container class= "md-block">
+					<label>Description</label>
+					<textarea ng-model= "editData.description"></textarea>
+				</md-input-container>
+				<md-input-container class= "md-block" >
+					<label>Price</label>
+					<input type= "number" ng-model= "editData.price" name= "price"></input>
+					<div class="errors" ng-messages="editForm.price.$error">
+						<div ng-message="number">please input a number</div>
+					</div>
+				</md-input-container>
+				<md-switch ng-model= "editData.status">enable sell</md-switch>
+				<div layout= "row" layout-align= "end center">
+					<!--md-button class= "md-raised md-primary">Close</md-button-->
+					<md-button ng-if= "editData.idProduct === undefined" ng-click= "ctrl.doEdit()" type="submit" class= "md-raised md-primary">Add</md-button>
+					<md-button ng-if= "editData.idProduct !== undefined" ng-click= "ctrl.doEdit()" type="submit" class= "md-raised md-primary">Modify</md-button>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+</div>

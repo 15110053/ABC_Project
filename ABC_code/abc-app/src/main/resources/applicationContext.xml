@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jee="http://www.springframework.org/schema/jee" 
+		xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p" 
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" 
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd
+       	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+<!-- repository beans -->
+	<bean id= "categoryDAO" class = "com.lshoi.repositoty.CategoryDAO">
+		<constructor-arg ref = "sessionFactory"></constructor-arg>
+	</bean>
+	<bean id= "subCategoryDAO" class = "com.lshoi.repositoty.SubCategoryDAO">
+		<constructor-arg ref = "sessionFactory"></constructor-arg>
+	</bean>
+	<bean id= "productDAO" class= "com.lshoi.repositoty.ProductDAO">
+		<constructor-arg ref= "sessionFactory"></constructor-arg>
+	</bean>
+	<bean id= "userDAO" class ="com.lshoi.repositoty.UserDAO">
+		<constructor-arg ref = "sessionFactory"></constructor-arg>
+	</bean>
+	<bean id= "orderDAO" class ="com.lshoi.repositoty.OrderDAO">
+		<constructor-arg ref = "sessionFactory"></constructor-arg>
+	</bean>
+	
+<!-- service beans -->	
+	<bean id= "categoryService" class= "com.lshoi.service.CategoryServiceImpl">
+		<constructor-arg ref = "categoryDAO"></constructor-arg>
+	</bean>
+	<bean id= "subCategoryService" class= "com.lshoi.service.SubCategoryServiceImpl">
+		<constructor-arg ref = "subCategoryDAO"></constructor-arg>
+	</bean>
+	<bean id= "productService" class = "com.lshoi.service.ProductServiceImpl">
+		<constructor-arg ref = "productDAO"></constructor-arg>
+		<constructor-arg ref = "subCategoryDAO"></constructor-arg>
+	</bean>
+	<bean id= "userService" class= "com.lshoi.service.UserServiceImpl">
+		<constructor-arg ref= "userDAO"></constructor-arg>
+	</bean>
+	<bean id= "orderService" class= "com.lshoi.service.OrderServiceImpl">
+		<constructor-arg ref= "orderDAO"></constructor-arg>
+	</bean>
+	
+<!-- controller beans -->
+	<bean id= "mainPageController" class= "com.lshoi.controller.MainPageController">
+		<constructor-arg ref = "categoryService"></constructor-arg>
+		<constructor-arg ref = "subCategoryService"></constructor-arg>
+		<constructor-arg ref = "productService"></constructor-arg>
+	</bean>
+	<bean id= "productPageController" class= "com.lshoi.controller.ProductPageController">
+		<constructor-arg ref = "productService"></constructor-arg>
+	</bean>
+	<bean id= "userController" class = "com.lshoi.controller.UserController">
+		<constructor-arg ref = "userService"></constructor-arg>
+	</bean>
+	<bean id= "loginController" class = "com.lshoi.controller.LoginController">
+		<constructor-arg ref = "userService"></constructor-arg>
+	</bean>
+	<bean id= "cartController" class = "com.lshoi.controller.CartController">
+	</bean>
+	<bean id= "modifyProductController" class= "com.lshoi.controller.ModifyProductController">
+		<constructor-arg ref = "productService"></constructor-arg>
+	</bean>
+	<bean id= "orderController" class= "com.lshoi.controller.OrderController">
+		<constructor-arg ref = "orderService"></constructor-arg>
+	</bean>
+	
+<!-- filter 
+	<bean id= "regularUserRequestFilter" class= "com.lshoi.filter.RegularUserRequestFilter">
+	</bean>
+	
+	<bean id= "regularUserRequestFilterBean" class = "org.springframework.boot.web.servlet.FilterRegistrationBean">
+		<property name="setFilter" ref= "regularUserRequestFilter" />
+		<property name="addUrlPatterns" value= "/User/*" />
+		<property name="addUrlPatterns" value= "/Cart/*" />
+	</bean>
+-->
+<!-- transaction manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name= "sessionFactory" ref="sessionFactory"/>
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:property-placeholder location="database.properties" />
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	            <prop key="hibernate.show_sql">false</prop>
+	            <prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.lshoi.models.Category</value>
+				<value>com.lshoi.models.SubCategory</value>
+				<value>com.lshoi.models.Product</value>
+				<value>com.lshoi.models.User</value>
+				<value>com.lshoi.models.OrderProduct</value>
+				<value>com.lshoi.models.OrderDetail</value>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id = "userFilter" class="com.lshoi.filter.RegularUserRequestFilter"></bean>
+	
+	<bean id = "userFilterAdding" class= "com.lshoi.filter.MyFilterRegistration" init-method="init">
+		<property name="filter" ref="userFilter" />
+	</bean> -->
+</beans>

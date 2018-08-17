@@ -1,0 +1,89 @@
+<div>
+	<div layout = "column" class = "md-padding">
+		<div class = "center md-whiteframe-8dp" layout = "column" layout-wrap>
+			<h2>Create a new account</h2>
+			<md-tabs md-dynamic-height md-border-bottom md-selected="selectedIndex">
+				<md-tab label= "Step 1" ng-disabled= "!step1Status">
+					<form novalidate name = "registerFormOne" >
+						<md-input-container class = "md-block">
+							<label>User Name</label>
+							<input required ng-model = "userName" name = "userName"></input>
+							<div ng-messages = "registerFormOne.userName.$error">
+								<div ng-message = "required">Please enter your user name</div>
+							</div>
+						</md-input-container>
+						
+						<md-input-container class = "md-block" >
+							<label>Password</label>
+							<input required type = "password" ng-model = "password" name = "password"></input>
+							<div ng-messages = "registerFormOne.password.$error">
+								<div ng-message = "required">Please enter your password</div>
+							</div>
+						</md-input-container>
+						<md-input-container class = "md-block" >
+							<label>Email</label>
+							<input required type = "email" ng-model = "email" name = "email"></input>
+							<div ng-messages = "registerFormOne.email.$error">
+								<div ng-message = "required">Please enter your email</div>
+							</div>
+						</md-input-container>
+						
+						<div layout = "row" layout-align = "end center">
+							<md-button type = "submit" ng-click = "ctrl.openTab('2')" class = "md-raised md-primary">Step two</md-button>
+						</div>
+					</form>
+				</md-tab>
+				<md-tab label= "step 2" ng-disabled= "!step2Status">
+					<form novalidate name = "registerFormTwo">
+						<md-input-container class = "md-block" >
+							<label>Full name</label>
+							<input required ng-model = "fullName" name = "fullName"></input>
+							<div ng-messages = "registerFormTwo.fullName.$error">
+								<div ng-message = "required">Please enter your full name</div>
+							</div>
+						</md-input-container>
+
+						<md-input-container class = "md-block" >
+							<label>Phone number</label>
+							<input md-maxlength = "11" required type = "number" ng-model = "phoneNumber" name = "phoneNumber"></input>
+							<div ng-messages = "registerFormTwo.phoneNumber.$error">
+								<div ng-message = "required">Please enter your phone number</div>
+								<div ng-message = "md-maxlength">Phone number must be less than 11 digits</div>
+							</div>
+						</md-input-container>
+						<md-input-container class = "md-block" >
+							<label>identity number</label>
+							<input required type = "number" ng-model = "identityNumber" name = "identityNumber"></input>
+							<div ng-messages = "registerFormTwo.identityNumber.$error">
+								<div ng-message = "required">Please enter your identity number</div>
+							</div>
+						</md-input-container>
+						
+						<div layout = "row" layout-align = "end center">
+							<md-button ng-click = "ctrl.openTab('1')" class = "md-raised md-primary">Back</md-button>
+							<md-button type = "submit" ng-click = "ctrl.openTab('3')" class = "md-raised md-primary">Next</md-button>
+						</div>
+					</form>
+				</md-tab>
+				<md-tab label= "Step 3" ng-disabled= "!step3Status">
+					<form novalidate name = "registerFormThree">
+						<md-input-container flex= "30">
+							<label>Role</label>
+							<md-select ng-model= "role" name= "role" required>
+								<md-option ng-value= "0">CONSUMER</md-option>
+								<md-option ng-value= "1">PROCUDER</md-option>
+							</md-select>
+							<div class="errors" ng-messages="registerFormThree.role.$error">
+								<div ng-message="required">Required</div>
+							</div>
+						</md-input-container>
+						<div layout = "row" layout-align = "end center">
+							<md-button ng-click = "ctrl.openTab('2')" class = "md-raised md-primary">Back</md-button>
+							<md-button type = "submit" ng-click = "ctrl.register($event)" class = "md-raised">Register</md-button>
+						</div>
+					</form>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</div>
+</div>
