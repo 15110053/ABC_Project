@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public List<Object> login(UserDTO userDTO) {
+		if(userDTO.getLoginName() == null || userDTO.getPassword() == null)
+			return null;
 		userDTO.setPassword(DigestUtils.sha1Hex(userDTO.getPassword()));
 		User loginUser = userDAO.login(UtilityConvertBetweenEntityAndDTO.convertToUserEntity(userDTO));
 		if(loginUser != null) {

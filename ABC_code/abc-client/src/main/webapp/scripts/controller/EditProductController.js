@@ -15,6 +15,7 @@ angular.module("EcommerceModule").controller("EditProductController", function($
 	$scope.category;
 	$scope.subCategory;
 	$scope.editData= {};
+	$scope.file;
 	var CategoryData;
 	var SubCategoryData;
 //add or edit
@@ -65,7 +66,7 @@ angular.module("EcommerceModule").controller("EditProductController", function($
 					).then(function(){
 						$state.go("main");
 					});
-				}else $state.go("managementProduct");
+				}else $state.go("producerManagement.managementProduct");
 			}, function(error){
 				console.log(error);
 				$mdDialog.show(
@@ -85,7 +86,7 @@ angular.module("EcommerceModule").controller("EditProductController", function($
 	var editProduct = function(){
 		EditProductService.editProduct($scope.editData, $cookies.getObject("token")[1]).then(
 			function(response){
-				$state.go("managementProduct");
+				$state.go("producerManagement.managementProduct");
 			}, function(error){
 				$mdDialog.show(
 					$mdDialog.alert()

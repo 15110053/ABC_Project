@@ -138,7 +138,8 @@ public class UtilityConvertBetweenEntityAndDTO {
 		order.setContent(orderDTO.getContent());
 		order.setPrice(orderDTO.getPrice());
 		order.setStatus(OrderStatus.valueOf(orderDTO.getStatusDTO().name()));
-		order.setConsumer(convertToUserEntity(orderDTO.getConsumerDTO()));
+		if(orderDTO.getConsumerDTO() != null)
+			order.setConsumer(convertToUserEntity(orderDTO.getConsumerDTO()));
 		order.setAddress(orderDTO.getAddress());
 		order.setFullName(orderDTO.getFullName());
 		order.setPhoneNumber(orderDTO.getPhoneNumber());
@@ -151,14 +152,16 @@ public class UtilityConvertBetweenEntityAndDTO {
 		orderDetailDTO.setQuantity(orderDetail.getQuantity());
 		orderDetailDTO.setOrder(convertToOrderDTO(orderDetail.getOrder()));
 		orderDetailDTO.setProduct(convertToProductDTO(orderDetail.getProduct()));
+		orderDetailDTO.setStatusDTO(OrderStatusDTO.valueOf(orderDetail.getStatus().name()));
 		return orderDetailDTO;
 	}
 	
 	public static OrderDetail convertToOrderDetailEntity(OrderDetailDTO orderDetailDTO) {
 		OrderDetail orderDetail = new OrderDetail();
-		orderDetail.setQuantity(orderDetail.getQuantity());
+		orderDetail.setQuantity(orderDetailDTO.getQuantity());
 		orderDetail.setOrder(convertToOrderEntity(orderDetailDTO.getOrder()));
 		orderDetail.setProduct(convertToProductEntity(orderDetailDTO.getProduct()));
+		orderDetail.setStatus(OrderStatus.valueOf(orderDetailDTO.getStatusDTO().name()));
 		return orderDetail;
 	}
 }

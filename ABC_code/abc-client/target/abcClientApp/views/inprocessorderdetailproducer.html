@@ -1,0 +1,40 @@
+<div class = "md-padding cartTableProduct">
+	<h3>In-process order list</h3>
+	<!--table class= "md-whiteframe-5dp" md-colors="{background: 'Grey-50'}">
+		<tr>
+			<th>Order ID</th>
+			<th>Image</th>
+			<th>Product Name</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat= "x in productData">
+			<td><p ng-if= "x.order.idOrder != productData[$index-1].order.idOrder">{{x.order.idOrder}}</p></td>
+			<td><img ng-src= "{{x.product.image}}"></td>
+			<td>{{x.product.productName}}</td>
+			<td>{{x.product.price.toLocaleString("vi",{ style: 'currency', currency: 'VND' })}}</td>
+			<td>{{x.quantity}}</td>
+			<td>{{x.statusDTO}}</td>
+			<td><md-button class= "md-raised md-warn" ng-click= "ctrl.fail(x.order.idOrder, x.product.idProduct, $index)">Fail</md-button></td>
+		</tr>
+	</table-->
+	
+	<table class= "md-whiteframe-5dp" md-colors="{background: 'Grey-50'}">
+		<tr>
+			<th>Order ID</th>
+			<th>Order date</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat= "x in orderData">
+			<td ng-click= "ctrl.openDialog(x.idOrder, $event)">{{x.idOrder}}</td>
+			<td ng-click= "ctrl.openDialog(x.idOrder, $event)">{{x.orderDate}}</td>
+			<td ng-click= "ctrl.openDialog(x.idOrder, $event)">{{x.statusDTO}}</td>
+			<td layout= "column">
+				<md-button ng-click= "ctrl.fail(x.idOrder, $index)" class= "md-raised md-warn">Fail</md-button>
+			</td>
+		</tr>
+	</table>
+</div>

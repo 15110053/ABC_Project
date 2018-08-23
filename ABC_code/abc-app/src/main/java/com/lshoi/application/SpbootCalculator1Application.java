@@ -52,7 +52,7 @@ public class SpbootCalculator1Application {
 		FilterRegistrationBean<ProducerRequestFilter> request 
 			= new FilterRegistrationBean<ProducerRequestFilter>();
 		request.setFilter(new ProducerRequestFilter());
-		request.addUrlPatterns("/ModifyProduct/*");
+		request.addUrlPatterns("/ModifyProduct/*", "/ChangeOrderStatus/*");
 		return request;
 	}
 }

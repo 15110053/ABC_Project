@@ -1,4 +1,4 @@
-angular.module("EcommerceModule").controller("RegisterController", function($scope, $mdDialog, RegisterService){
+angular.module("EcommerceModule").controller("RegisterController", function($scope, $mdDialog, $state, RegisterService){
 	$scope.selectedIndex=0;
 	$scope.step1Status= true;
 	$scope.step2Status= false;
@@ -73,7 +73,9 @@ angular.module("EcommerceModule").controller("RegisterController", function($sco
 							.textContent('Register success')
 							.ok('Got it!')
 							.targetEvent(ev)
-					);
+					).then(function(){
+						$state.go("login");
+					});
 				}else {
 					$mdDialog.show(
 					$mdDialog.alert()

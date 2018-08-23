@@ -61,19 +61,6 @@ app.config(function($urlRouterProvider, $stateProvider){
 						templateUrl : "views/managementproductpage.html", 
 						controller: "ManagementProductController",
 						controllerAs: "ctrl"})
-		.state("producerManagement.orderList", { url: "/orderList", 
-						templateUrl : "views/orderlist.html", 
-						controller: "OrderListController", 
-						controllerAs: "ctrl"})
-		.state("producerManagement.profileManagement", { url: "/producerProfile", 
-						templateUrl : "views/profilemanagementpage.html", 
-						controller: "ProfileManagementController", 
-						controllerAs: "ctrl"})
-		//end producer management
-		.state("managementProduct", { url: "/managementProduct", 
-						templateUrl : "views/managementproductpage.html", 
-						controller: "ManagementProductController",
-						controllerAs: "ctrl"})
 		.state("editProduct", { url: "/editProduct/:id", 
 						templateUrl : "views/editproductpage.html", 
 						controller: "EditProductController",
@@ -82,31 +69,29 @@ app.config(function($urlRouterProvider, $stateProvider){
 						templateUrl : "views/editproductpage.html", 
 						controller: "EditProductController",
 						controllerAs: "ctrl"})
+		.state("producerManagement.waitingOrderList", { url: "/waitingOrderList", 
+						templateUrl : "views/orderdetailproducer.html", 
+						controller: "OrderListProducerController", 
+						controllerAs: "ctrl"})
+		.state("producerManagement.inprocessOrderList", { url: "/inprocessOrderList", 
+						templateUrl : "views/inprocessorderdetailproducer.html", 
+						controller: "InprocessOrderProducerController", 
+						controllerAs: "ctrl"})
+		.state("producerManagement.failOrderList", { url: "/failOrderList", 
+						templateUrl : "views/failorderdetailproducer.html", 
+						controller: "FailOrderProducerController", 
+						controllerAs: "ctrl"})
+		.state("producerManagement.profileManagement", { url: "/producerProfile", 
+						templateUrl : "views/profilemanagementpage.html", 
+						controller: "ProfileManagementController", 
+						controllerAs: "ctrl"})
+		//end producer management
 		.state("orderPage", { url: "/order",
 						templateUrl : "views/orderpage.html", 
 						controller: "OrderPageController",
 						controllerAs: "ctrl"})
 		
 		.state("otherwise", { url: "/404", templateUrl : "views/404.html"});
-	/*
-	$routeProvider
-	.when("/", {templateUrl : "views/mainpage.html"})
-	.when("/product/:filterparam", {templateUrl : "views/productfilter.html", 
-	controller: "ProductFilterController", controllerAs: "ctrl"})
-	.when("/product/:categoryName/:subCategoryName/:categoryId", 
-	{templateUrl : "views/productfilter.html", controller: "ProductFilterController", controllerAs: "ctrl"})
-	.when("/product/:categoryName/:categoryId", 
-	{templateUrl : "views/productfilter.html", controller: "ProductFilterController", controllerAs: "ctrl"})
-	.when("/search/:keyWord", 
-	{templateUrl : "views/productfilter.html", controller: "ProductFilterSearchController", controllerAs: "ctrl"})
-	.when("/login", 
-	{templateUrl : "views/loginpage.html", controller: "LoginController", controllerAs: "ctrl"})
-	.when("/register", 
-	{templateUrl : "views/registerpage.html", controller: "RegisterController", controllerAs: "ctrl"})
-	.when("/productDetail/:id/:name", {templateUrl : "views/productpage.html"})
-	.when("/cart", {templateUrl : "views/cartpage.html", controller: "CartController", controllerAs: "ctrl"})
-	.otherwise({templateUrl: "views/404.html"});
-	*/
 });
 
 app.run(["$state", "$rootScope", "$cookies", "$transitions", "$mdDialog", function($state, $rootScope, $cookies, $transitions, $mdDialog){
@@ -121,7 +106,10 @@ app.run(["$state", "$rootScope", "$cookies", "$transitions", "$mdDialog", functi
     });*/
 
 	$transitions.onStart({}, function(transition){
-		if(transition.to().name === "userManagement" || transition.to().name === "userManagement.cart" || transition.to().name === "userManagement.orderList"){
+		if(transition.to().name === "userManagement" || 
+			transition.to().name === "userManagement.cart" || 
+			transition.to().name === "userManagement.profileManagement" || 
+			transition.to().name === "userManagement.orderList" ){
 			var object = $cookies.getObject("token");
 			if(object === undefined || object === null ){
 				$state.go("login");
@@ -137,6 +125,31 @@ app.run(["$state", "$rootScope", "$cookies", "$transitions", "$mdDialog", functi
 				);
 			}
 		}
+		
+		if(transition.to().name === "producerManagement" || 
+			transition.to().name === "producerManagement.managementProduct" || 
+			transition.to().name === "producerManagement.waitingOrderList" || 
+			transition.to().name === "producerManagement.inprocessOrderList" || 
+			transition.to().name === "producerManagement.failOrderList" || 
+			transition.to().name === "editProduct" || 
+			transition.to().name === "addProduct" || 
+			transition.to().name === "producerManagement.profileManagement" ){
+			var object = $cookies.getObject("token");
+			if(object === undefined || object === null ){
+				$state.go("login");
+			}else if(object[0].role !== "PRODUCER"){
+				$state.go("main");
+				$mdDialog.show(
+					$mdDialog.alert()
+						.clickOutsideToClose(true)
+						.title('Notification')
+						.textContent('not permission')
+						.ariaLabel('Alert Dialog Demo')
+						.ok('Got it')
+				);
+			}
+		}
+		
 		if(transition.to().name === "orderPage"){
 			var object = $cookies.getObject("token");
 			if(object === undefined || object === null ){
@@ -155,48 +168,6 @@ app.run(["$state", "$rootScope", "$cookies", "$transitions", "$mdDialog", functi
 		}
 		if(transition.to().name === "login" && $cookies.get("token") !== undefined && $cookies.get("token") !== null)
 			$state.go("main");
-		if(transition.to().name === "managementProduct"){
-			var object = $cookies.getObject("token");
-			if(object === undefined || object === null || object[0].role !== "PRODUCER"){
-				$state.go("main");
-				$mdDialog.show(
-					$mdDialog.alert()
-						.clickOutsideToClose(true)
-						.title('Notification')
-						.textContent('not permission')
-						.ariaLabel('Alert Dialog Demo')
-						.ok('Got it')
-				);
-			}
-		}
-		if(transition.to().name === "editProduct"){
-			var object = $cookies.getObject("token");
-			if(object === undefined || object === null || object[0].role !== "PRODUCER"){
-				$state.go("main");
-				$mdDialog.show(
-					$mdDialog.alert()
-						.clickOutsideToClose(true)
-						.title('Notification')
-						.textContent('not permission')
-						.ariaLabel('Alert Dialog Demo')
-						.ok('Got it')
-				);
-			}
-		}
-		if(transition.to().name === "addProduct"){
-			var object = $cookies.getObject("token");
-			if(object === undefined || object === null || object[0].role !== "PRODUCER"){
-				$state.go("main");
-				$mdDialog.show(
-					$mdDialog.alert()
-						.clickOutsideToClose(true)
-						.title('Notification')
-						.textContent('not permission')
-						.ariaLabel('Alert Dialog Demo')
-						.ok('Got it')
-				);
-			}
-		}
 	});
 	/*$transitions.onSuccess({}, function() {
 		console.log("statechange success");

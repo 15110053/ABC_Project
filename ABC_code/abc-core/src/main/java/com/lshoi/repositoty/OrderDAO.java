@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.lshoi.models.OrderDetail;
 import com.lshoi.models.OrderProduct;
+import com.lshoi.models.OrderStatus;
 
 public class OrderDAO {
 	private SessionFactory sessionFactory;
@@ -50,7 +51,7 @@ public class OrderDAO {
 				.add(Restrictions.eq("idOrder", id)).uniqueResult();
 	}
 	
-	public boolean cancelOrder(OrderProduct order) {
+	public boolean changeOrderStatus(OrderProduct order) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.update(order);
@@ -60,12 +61,72 @@ public class OrderDAO {
 		}
 	}
 	
+	public boolean changeOrderDetailStatus(OrderDetail orderDetail) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			session.update(orderDetail);
+			return true;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 	public List<OrderDetail> getOrderDetail(int orderId){
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			return session.createCriteria(OrderDetail.class)
+			List<OrderDetail> listOrderDetail =  session.createCriteria(OrderDetail.class)
 					.add(Restrictions.eq("order.idOrder", orderId)).list();
+			session.flush();
+			session.clear();
+			return listOrderDetail;
 		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public List<OrderDetail> getOrderDetailByProducer(int orderId, int producerId){
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			return session.createQuery("from OrderDetail where order.idOrder = "+ orderId
+					+ " and product.user.userId = "+producerId).list();
+		}catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	public List<OrderDetail> getWaitingOrderDetailByProducer(int idProducer){
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			return session.createQuery("from OrderDetail where "
+					+ "product.user.userId = "+ idProducer +" and status = '"
+					+ OrderStatus.NONE+"' order by idOrder").list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<OrderDetail> getInprocessOrderDetailByProducer(int idProducer){
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			return session.createQuery("from OrderDetail where "
+					+ "product.user.userId = "+ idProducer +" and status = '"
+					+ OrderStatus.INPROCESS+"' order by idOrder").list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<OrderDetail> getFailOrderDetailByProducer(int idProducer){
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			return session.createQuery("from OrderDetail where "
+					+ "product.user.userId = "+ idProducer +" and status = '"
+					+ OrderStatus.FAIL+"' order by idOrder").list();
+		}catch(Exception ex) {
+			ex.printStackTrace();
 			return null;
 		}
 	}

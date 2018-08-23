@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +27,10 @@ public class OrderDetail implements Serializable{
 	
 	@Column
 	private int quantity;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 
 	public OrderDetail() {
 		super();
@@ -53,5 +59,14 @@ public class OrderDetail implements Serializable{
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+	
 	
 }

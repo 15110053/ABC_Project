@@ -2,11 +2,15 @@
 	<div layout= "row">
 		<div class= "md-padding" flex = "20">
 			<md-list class= "md-whiteframe-5dp" md-colors="{background: 'Grey-50'}">
-				<md-list-item ng-click="ctrl.openProfileManagement()">Profile management</md-list-item>
+				<md-list-item ng-class= "{'clicked': profilePage}" ng-click="ctrl.openProfileManagement()">Profile management</md-list-item>
 				<md-divider></md-divider>
-				<md-list-item ng-click="ctrl.openOrderManagement()">Order management</md-list-item>
+				<md-list-item ng-class= "{'clicked': productPage}" ng-click="ctrl.openProductManagement()">Product management</md-list-item>
 				<md-divider></md-divider>
-				<md-list-item ng-click="ctrl.openProductManagement()">Product management</md-list-item>
+				<md-list-item ng-class= "{'clicked': waitingOrderPage}" ng-click="ctrl.openWaitingOrder()">Order Waiting</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-class= "{'clicked': inprocessOrderPage}" ng-click="ctrl.openInprocessOrder()">Order In-process</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item ng-class= "{'clicked': failOrderPage}" ng-click="ctrl.openFailOrder()">Order Failed</md-list-item>
 			</md-list>
 		</div>
 		<div flex ui-view></div>

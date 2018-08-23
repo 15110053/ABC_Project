@@ -5,7 +5,7 @@ public class OrderDetailDTO {
 	private OrderProductDTO order;
 	private ProductDTO product;
 	private int quantity;
-	
+	private OrderStatusDTO statusDTO;
 	public OrderDetailDTO() {
 		super();
 	}
@@ -32,5 +32,14 @@ public class OrderDetailDTO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public OrderStatusDTO getStatusDTO() {
+		return statusDTO;
+	}
+
+	public void setStatusDTO(OrderStatusDTO statusDTO) {
+		this.statusDTO = statusDTO;
+	}
+	
 	
 }

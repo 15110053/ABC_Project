@@ -112,13 +112,12 @@ md-input-container .md-error-spacer{
 
 .tableProduct table {
     border-collapse: collapse;
-	float: right;
     width: 100%;
 }
 
 .tableProduct th, td {
     text-align: left;
-    padding: 8px;
+    padding: 10px;
 }
 
 .tableProduct tr:nth-child(even){background-color: #f2f2f2}
@@ -139,6 +138,7 @@ md-input-container .md-error-spacer{
 .cartTableProduct th, td {
     text-align: left;
 	border-bottom: 1px solid #ddd;
+	padding: 10px;
 }
 
 .cartTableProduct th {
@@ -182,4 +182,7 @@ md-input-container .md-error-spacer{
 }
 .htmlDialog {
 	width: 80%;
+}
+.clicked {
+	background-color: #75D7B6;
 }

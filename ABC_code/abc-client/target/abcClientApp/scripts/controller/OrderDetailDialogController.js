@@ -22,7 +22,8 @@ angular.module("EcommerceModule").controller("OrderDetailDialogController", func
 	var totalProduct = function(){
 		var sum = 0;
 		for(var i=0; i< $scope.productData.length; i++)
-			sum += $scope.productData[i].quantity;
+			if($scope.productData[i].statusDTO !== "FAIL")
+				sum += $scope.productData[i].quantity;
 		$scope.totalProduct = sum;
 	}
 	getData(totalProduct);

@@ -1,15 +1,4 @@
 angular.module("EcommerceModule").controller("HeaderController", function ($scope, $mdDialog, $cookies, $state, $window, MainpageService, CartService){
-	/*this.querySearch = function(query){
-		var results = query ? self.states.filter( createFilterFor(query) ) : self.states,
-          deferred;
-		if (self.simulateQuery) {
-			deferred = $q.defer();
-			$timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-			return deferred.promise;
-		} else {
-			return results;
-		}
-	}*/
 	$scope.info;
 	$scope.loginStatus = $cookies.getObject("token") === undefined ? false : true;
 	$scope.keyWord;
@@ -56,13 +45,11 @@ angular.module("EcommerceModule").controller("HeaderController", function ($scop
 	this.logout = function(){
 		MainpageService.logOut($cookies.getObject("token")[1]).then(
 			function(response){
-				if(response.data.status == 0 || response.data.status == 1){
-					$cookies.remove("token");
-					$window.location.href= "/abcClientApp/";
-				}else console.log(response);
-					
+				$cookies.remove("token");
+				$window.location.href= "/abcClientApp/";
 			}, function(error){
-				console.log(error)
+				$cookies.remove("token");
+				$window.location.href= "/abcClientApp/";
 			}
 		)
 	}
@@ -72,25 +59,6 @@ angular.module("EcommerceModule").controller("HeaderController", function ($scop
 
 	this.openCart = function(){
 		$state.go("userManagement.cart");
-		/*CartService.openCart($cookies.get("token")).then(
-			function(response){
-				console.log(response);
-				if(response.data.status == 1){
-					$mdDialog.show(
-						$mdDialog.alert()
-						.clickOutsideToClose(true)
-						.title('Notification')
-						.textContent('not permission')
-						.ariaLabel('Alert Dialog')
-						.ok('Got it')
-					)
-				}else {
-					$state.go("cart");
-				}
-			}, function(error){
-				console.log(error);
-			}
-		)*/
 	}
 	var getInfo = function(){
 		var object = $cookies.getObject("token");

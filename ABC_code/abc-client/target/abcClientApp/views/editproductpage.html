@@ -2,7 +2,7 @@
 	<div layout= "row" class= "editDialog md-padding" layout-align= "center start">
 		<div layout= "column" layout-align= "center center">
 			<img class= "md-whiteframe-1dp" ng-src= "{{editData.image}}"></img>
-			<md-button type= "file" class= "md-raised">change image</md-button>
+			<input id="fileInput" ng-model= "file" type= "file"></input>
 		</div>
 		<div layout= "column" flex= "60">
 			<form class = "md-padding" name= "editForm">

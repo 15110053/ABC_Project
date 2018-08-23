@@ -1,4 +1,4 @@
-angular.module("EcommerceModule").controller("OrderListController", function ($scope, $cookies, $mdDialog, OrderPageService){
+angular.module("EcommerceModule").controller("OrderListController", function ($scope, $state, $cookies, $mdDialog, OrderPageService){
 	$scope.orderData;
 	this.isCancel = function(id){
 		for(var i=0; i<$scope.orderData.length; i++){
@@ -22,15 +22,25 @@ angular.module("EcommerceModule").controller("OrderListController", function ($s
 				consumerDTO: {
 					userId: $cookies.getObject("token")[0].userId
 				},
-				idOrder: orderid,
-				statusDTO: 1
+				idOrder: orderid
 			}
 			OrderPageService.cancelOrder(data, $cookies.getObject("token")[1]).then(
 				function(response){
+					console.log(response);
 					if(response.data.status == 0){
 						$scope.orderData = response.data.object;
-						for(var i=0; i<$scope.orderData.length; i++)
-							$scope.orderData[i].orderDate = new Date($scope.orderData[i].orderDate).toLocaleString('en-US', { timeZone: 'UTC' })
+					}
+					else {
+						$mdDialog.show(
+							$mdDialog.alert()
+								.clickOutsideToClose(true)
+								.title('Notification')
+								.textContent("Can't change status, please reload to update data")
+								.ariaLabel('Alert Dialog Demo')
+								.ok('Yes')
+						).then(function(){
+							$state.reload();
+						})
 					}
 				}, function(error){
 					console.log(error);
